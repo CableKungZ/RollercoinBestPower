@@ -7,10 +7,10 @@ How to Use Script
  2. Copy the Script from GitHub
  3. Press F12 and go to Console The Paste Script from Github
 
-Donation ?
- BTC : bc1qrwp34qnc35nt4htc3s54rsacw9uuu5q6n23trp
- ETH [ERC-20,OP,ARB] : 0xA6d651c8869cdaB1E9f9FD20668B8439fe3cd20B
- USDT [BEP-20,ERC-20] : 0xA6d651c8869cdaB1E9f9FD20668B8439fe3cd20B
- BNB [BEP-20] : 0xA6d651c8869cdaB1E9f9FD20668B8439fe3cd20B
- DOGE [DOGE] : D6gBpcadjQ1AmdmNyQKXESrQmWaT12EoAv
- MATIC [Polygon] : 0xA6d651c8869cdaB1E9f9FD20668B8439fe3cd20B
+Donation ?<br>
+ BTC : bc1qrwp34qnc35nt4htc3s54rsacw9uuu5q6n23trp<br>
+ ETH [ERC-20,OP,ARB] : 0xA6d651c8869cdaB1E9f9FD20668B8439fe3cd20B<br>
+ USDT [BEP-20,ERC-20] : 0xA6d651c8869cdaB1E9f9FD20668B8439fe3cd20B<br>
+ BNB [BEP-20] : 0xA6d651c8869cdaB1E9f9FD20668B8439fe3cd20B<br>
+ DOGE [DOGE] : D6gBpcadjQ1AmdmNyQKXESrQmWaT12EoAv<br>
+ MATIC [Polygon] : 0xA6d651c8869cdaB1E9f9FD20668B8439fe3cd20B<br>
