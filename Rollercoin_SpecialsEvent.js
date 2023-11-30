@@ -2,6 +2,9 @@ function main() {
     let PowerPerKecoin = 85000; // Power to get Each 1000 Ecoins
     let BonusPerKEcoin = 10; // Bonus% to get Each 1000 Ecoins
     let miners = getBestRatioMiners(PowerPerKecoin, BonusPerKEcoin);
+    console.log("Sort By Best Ecoin Ratio");
+    console.log("Power/1000Ecoin : "+PowerPerKecoin+" GH/S");
+    console.log("Bonus/1000Ecoin : "+BonusPerKEcoin)+" %";
     displayMiners(miners);
 
     // เพิ่ม Event Listener สำหรับแต่ละตัวของ item-title
@@ -49,7 +52,7 @@ function getBestRatioMiners(PowerPerKecoin, BonusPerKEcoin) {
     }
 
     // เรียงลำดับ miners ตาม Ratio จากสูงไปต่ำ
-    miners.sort((a, b) => b.Ratio - a.Ratio);
+    miners.sort((a, b) => b.EcoinRatio - a.EcoinRatio);
 
     return miners;
 }
@@ -65,7 +68,7 @@ function convertPowerToGigaHash(powerText) {
 }
 
 function displayMiners(miners) {
-    console.log(miners);
+    console.table(miners);
     // แสดงข้อมูลในตำแหน่งที่คุณต้องการ
 }
 

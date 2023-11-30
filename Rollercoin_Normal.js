@@ -1,5 +1,6 @@
 function main() {
     let miners = getBestRatioMiners();
+    console.log("Sort By Best POWER Ratio");
     displayMiners(miners);
 
     // เพิ่ม Event Listener สำหรับแต่ละตัวของ item-title
@@ -30,7 +31,8 @@ function getBestRatioMiners() {
         let power = convertPowerToGigaHash(powerText);
         let bonus = parseFloat(bonusText);
         let price = parseFloat(priceText.replace(/\s/g, '').replace('RLT', ''));
-        let ratio = (power/1000)/price; // the Ratio per 1000 Gh/s (Th/s)
+        let ratio = (power / 1000) / price;
+
 
         miners.push({
             'Name': name,
@@ -59,7 +61,7 @@ function convertPowerToGigaHash(powerText) {
 }
 
 function displayMiners(miners) {
-    console.log(miners);
+    console.table(miners);
     // แสดงข้อมูลในตำแหน่งที่คุณต้องการ
 }
 
