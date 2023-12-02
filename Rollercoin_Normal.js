@@ -2,17 +2,6 @@ function main() {
     let miners = getBestRatioMiners();
     console.log("Sort By Best POWER Ratio");
     displayMiners(miners);
-
-    // เพิ่ม Event Listener สำหรับแต่ละตัวของ item-title
-    let minerTitles = document.getElementsByClassName('item-title');
-    for (let i = 0; i < minerTitles.length; i++) {
-        minerTitles[i].addEventListener('click', function () {
-            // เรียกใช้ฟังก์ชัน getBestRatioMiners เพื่อดึงข้อมูลใหม่
-            miners = getBestRatioMiners();
-            // เรียกใช้ฟังก์ชัน displayMiners เพื่อแสดงข้อมูลทันที
-            displayMiners(miners);
-        });
-    }
 }
 
 function getBestRatioMiners() {
