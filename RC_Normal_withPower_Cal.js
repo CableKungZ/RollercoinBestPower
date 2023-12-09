@@ -24,7 +24,7 @@ function getBestRatioMiners(CurrentPower){
         let price = parseFloat(priceText.replace(/\s/g, '').replace('RLT', ''));
         let addpower = ((bonus/100)*CurrentPower);
         let ratio = ((power / 1000)+(addpower/1000)) / price;
-
+        let totalpower = power+addpower;
 
         miners.push({
             'Name': name,
@@ -32,7 +32,8 @@ function getBestRatioMiners(CurrentPower){
             'Power': power,
             'Bonus': bonus,
             'Addition[GH/S] ': addpower.toFixed(2),
-            'Ratio': ratio.toFixed(2)
+            'Ratio': ratio.toFixed(2),
+            'TotalPower [GH/S]': totalpower.toFixed(2)
 
         });
     }
