@@ -1,12 +1,13 @@
 function main() {
     let CurrentPower = 5444400; // Your Current Power in GH/S
-    let miners = getBestRatioMiners(CurrentPower);
+    let ownedMiners = ["Miner A", "Miner B", "Miner C", "Steamwheedle"]; // Example: List of owned miners
+    let miners = getBestRatioMiners(CurrentPower, ownedMiners);
     console.log("Sort By Ratio");
-    console.log("Your Power is : "+CurrentPower+" GH/S")
+    console.log("Your Power is : " + CurrentPower + " GH/S")
     displayMiners(miners);
 }
 
-function getBestRatioMiners(CurrentPower){
+function getBestRatioMiners(CurrentPower, ownedMiners) {
     let miners = [];
     let minerTitles = document.getElementsByClassName('item-title');
     let minerPrices = document.getElementsByClassName('item-price');
@@ -25,16 +26,17 @@ function getBestRatioMiners(CurrentPower){
         let addpower = ((bonus/100)*CurrentPower);
         let ratio = ((power / 1000)+(addpower/1000)) / price;
         let totalpower = power+addpower;
+        let owned = ownedMiners.includes(miner.Name) ? "✔" : "❌";
 
         miners.push({
             'Name': name,
+            'owned': owned,
             'Price': price,
             'Power': power,
             'Bonus': bonus,
             'Addition[GH/S] ': addpower.toFixed(2),
             'Ratio': ratio.toFixed(2),
             'TotalPower [GH/S]': totalpower.toFixed(2)
-
         });
     }
 
@@ -55,9 +57,7 @@ function convertPowerToGigaHash(powerText) {
 }
 
 function displayMiners(miners) {
-    console.table(miners);
-    // แสดงข้อมูลในตำแหน่งที่คุณต้องการ
+    console.table(miners, ['Name','owned', 'Price', 'Power', 'Bonus', 'Addition[GH/S]', 'Ratio', 'TotalPower [GH/S]' ]);
 }
 
 main();
-
