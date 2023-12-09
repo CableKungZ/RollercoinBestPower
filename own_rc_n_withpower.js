@@ -1,6 +1,12 @@
 function main() {
     let CurrentPower = 5444400; // Your Current Power in GH/S
-    let ownedMiners = ["Miner A", "Miner B", "Miner C", "Steamwheedle"]; // Example: List of owned miners
+    let ownedMiners = ['E.V.A.',
+    "DjBone",
+    "HauntedHouse",
+    "Steamwheedle",
+    "Uncommon RollerArc S1",
+    "Legendary RollerArc S1",
+    "TLM-2000"]; // Example: List of owned miners
     let miners = getBestRatioMiners(CurrentPower, ownedMiners);
     console.log("Sort By Ratio");
     console.log("Your Power is : " + CurrentPower + " GH/S")
@@ -26,7 +32,9 @@ function getBestRatioMiners(CurrentPower, ownedMiners) {
         let addpower = ((bonus/100)*CurrentPower);
         let ratio = ((power / 1000)+(addpower/1000)) / price;
         let totalpower = power+addpower;
-        let owned = ownedMiners.includes(miner.Name) ? "✔" : "❌";
+        let owned = ownedMiners.includes(name) ? "✔" : "❌";
+
+
 
         miners.push({
             'Name': name,
