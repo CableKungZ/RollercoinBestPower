@@ -6,17 +6,6 @@ function main() {
     console.log("Power/1000Ecoin : "+PowerPerKecoin+" GH/S");
     console.log("Bonus/1000Ecoin : "+BonusPerKEcoin)+" %";
     displayMiners(miners);
-
-    // เพิ่ม Event Listener สำหรับแต่ละตัวของ item-title
-    let minerTitles = document.getElementsByClassName('item-title');
-    for (let i = 0; i < minerTitles.length; i++) {
-        minerTitles[i].addEventListener('click', function () {
-            // เรียกใช้ฟังก์ชัน getBestRatioMiners เพื่อดึงข้อมูลใหม่
-            miners = getBestRatioMiners(PowerPerKecoin, BonusPerKEcoin);
-            // เรียกใช้ฟังก์ชัน displayMiners เพื่อแสดงข้อมูลทันที
-            displayMiners(miners);
-        });
-    }
 }
 
 function getBestRatioMiners(PowerPerKecoin, BonusPerKEcoin) {
