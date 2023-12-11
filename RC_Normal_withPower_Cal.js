@@ -1,12 +1,14 @@
 function main() {
-    let CurrentPower = 5444400; // Your Current Power in GH/S
-    let miners = getBestRatioMiners(CurrentPower);
+    let CurrentPower = 500000; // Your Current Power in GH/S
+    let CurrentBonus = 100; // Put the bonus displayed on your profile. 1 = +1% , 100 = +100%
+    let miners = getBestRatioMiners(CurrentPower,CurrentBonus);
     console.log("Sort By Ratio");
     console.log("Your Power is : "+CurrentPower+" GH/S")
+    console.log("Your Current Bonus is : "+CurrentBonus+" %")
     displayMiners(miners);
 }
 
-function getBestRatioMiners(CurrentPower){
+function getBestRatioMiners(CurrentPower,CurrentBonus){
     let miners = [];
     let minerTitles = document.getElementsByClassName('item-title');
     let minerPrices = document.getElementsByClassName('item-price');
@@ -22,18 +24,20 @@ function getBestRatioMiners(CurrentPower){
         let power = convertPowerToGigaHash(powerText);
         let bonus = parseFloat(bonusText);
         let price = parseFloat(priceText.replace(/\s/g, '').replace('RLT', ''));
-        let addpower = ((bonus/100)*CurrentPower);
-        let ratio = ((power / 1000)+(addpower/1000)) / price;
+        let addpower = (power*((bonus + CurrentBonus) / 100))+(CurrentPower*bonus);
         let totalpower = power+addpower;
+        let ratio = (totalpower/1000) / price;
+        let totalbonus = (bonus+CurrentBonus)/100;
 
         miners.push({
             'Name': name,
             'Price': price,
             'Power': power,
             'Bonus': bonus,
-            'Addition[GH/S] ': addpower.toFixed(2),
+            'Addition[GH/S]': addpower.toFixed(3), 
             'Ratio': ratio.toFixed(2),
-            'TotalPower [GH/S]': totalpower.toFixed(2)
+            'TotalPower [GH/S]': totalpower.toFixed(2),
+            'Total Bonus %': (totalbonus*100).toFixed(3)
 
         });
     }
