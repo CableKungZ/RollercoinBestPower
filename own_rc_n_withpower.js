@@ -1,5 +1,7 @@
 function main() {
     let CurrentPower = 5444400; // Your Current Power in GH/S
+    let CurrentBonus = 100; // Put the bonus displayed on your profile. 1 = +1% , 100 = +100%
+
     let ownedMiners = ['E.V.A.',
     "CP-106",
     "HauntedHouse",
@@ -7,13 +9,13 @@ function main() {
     "Uncommon RollerArc S1",
     "Legendary RollerArc S1",
     "TLM-2000"]; // Example: List of owned miners
-    let miners = getBestRatioMiners(CurrentPower, ownedMiners);
+    let miners = getBestRatioMiners(CurrentPower,CurrentBonus, ownedMiners);
     console.log("Sort By Ratio");
     console.log("Your Power is : " + CurrentPower + " GH/S")
     displayMiners(miners);
 }
 
-function getBestRatioMiners(CurrentPower, ownedMiners) {
+function getBestRatioMiners(CurrentPower,CurrentBonus, ownedMiners) {
     let miners = [];
     let minerTitles = document.getElementsByClassName('item-title');
     let minerPrices = document.getElementsByClassName('item-price');
@@ -31,9 +33,11 @@ function getBestRatioMiners(CurrentPower, ownedMiners) {
         let price = parseFloat(priceText.replace(/\s/g, '').replace('RLT', ''));
         let owned = ownedMiners.includes(name);
 
-        let addpower = owned ? 0 : ((bonus / 100) * CurrentPower);
-        let ratio = ((power / 1000) + (addpower / 1000)) / price;
+        let addpower = owned ? power*CurrentBonus : (power*((bonus + CurrentBonus) / 100))+(CurrentPower*bonus);;
         let totalpower = power + addpower;
+        let ratio = (totalpower/1000) / price;
+        let totalbonus = (bonus+CurrentBonus)/100;
+
 
         miners.push({
             'Name': name,
@@ -43,7 +47,8 @@ function getBestRatioMiners(CurrentPower, ownedMiners) {
             'Bonus': bonus,
             'Addition[GH/S] ': addpower.toFixed(2),
             'Ratio': ratio.toFixed(2),
-            'TotalPower [GH/S]': totalpower.toFixed(2)
+            'T.Power[GH/S]': totalpower.toFixed(2),
+            'T.Bonus[%]': totalbonus.toFixed(2)
         });
     }
 
@@ -64,7 +69,7 @@ function convertPowerToGigaHash(powerText) {
 }
 
 function displayMiners(miners) {
-    console.table(miners, ['Name','owned', 'Price', 'Power', 'Bonus', 'Addition[GH/S]', 'Ratio', 'TotalPower [GH/S]' ]);
+    console.table(miners);
 }
 
 main();
