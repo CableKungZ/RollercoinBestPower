@@ -1,5 +1,5 @@
 function main() {
-    let CurrentPower = 5444400; // Your Current Power in GH/S
+    let CurrentPower = 500000; // Your Current Power in GH/S
     let CurrentBonus = 100; // Put the bonus displayed on your profile. 1 = +1% , 100 = +100%
 
     let ownedMiners = ['E.V.A.',
@@ -12,6 +12,7 @@ function main() {
     let miners = getBestRatioMiners(CurrentPower,CurrentBonus, ownedMiners);
     console.log("Sort By Ratio");
     console.log("Your Power is : " + CurrentPower + " GH/S")
+    console.log("Your Current Bonus is : "+CurrentBonus+" %")
     displayMiners(miners);
 }
 
@@ -48,7 +49,7 @@ function getBestRatioMiners(CurrentPower,CurrentBonus, ownedMiners) {
             'Addition[GH/S] ': addpower.toFixed(2),
             'Ratio': ratio.toFixed(2),
             'T.Power[GH/S]': totalpower.toFixed(2),
-            'T.Bonus[%]': totalbonus.toFixed(2)
+            'T.Bonus[%]': (totalbonus*100).toFixed(2)
         });
     }
 
