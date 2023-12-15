@@ -2,9 +2,7 @@ function main() {
     let CurrentPower = 500000; // Your Current Power in GH/S
     let CurrentBonus = 100; // Put the bonus displayed on your profile. 1 = +1% , 100 = +100%
     let miners = getBestRatioMiners(CurrentPower,CurrentBonus);
-    console.log("Sort By Ratio");
-    console.log("Your Power is : "+CurrentPower+" GH/S")
-    console.log("Your Current Bonus is : "+CurrentBonus+" %")
+    console.log("Sort By Ratio\nYour Power is : "+CurrentPower+" GH/S\nYour Current Bonus is : "+CurrentBonus+" %\nCP X AB = CurrentPower * Addition Bonus\nMP X TB = MinerPower * Total Bonus")
     displayMiners(miners);
 }
 
@@ -24,18 +22,26 @@ function getBestRatioMiners(CurrentPower,CurrentBonus){
         let power = convertPowerToGigaHash(powerText);
         let bonus = parseFloat(bonusText);
         let price = parseFloat(priceText.replace(/\s/g, '').replace('RLT', ''));
-        let addpower = (power*((bonus + CurrentBonus) / 100))+(CurrentPower*bonus);
-        let totalpower = power+addpower;
-        let ratio = (totalpower/1000) / price;
+
         let totalbonus = (bonus+CurrentBonus)/100;
+
+        // CurrentPower * MinerBonus
+        let ctm = CurrentPower*(bonus/100);
+        // MinerPower * Total Bonus
+        let mtb = power*totalbonus;
+        // MinerPower + (CurrentPower*MinerPower) + (Minerpower*TotalBonus)
+        let totalpower = power+ctm+mtb;
+        let ratio = (totalpower/1000) / price;
 
         miners.push({
             'Name': name,
             'Price': price,
             'Power': power,
-            'Bonus': bonus,
-            'Addition[GH/S]': addpower.toFixed(3), 
+            'Bonus[%]': bonus,
             'Ratio': ratio.toFixed(2),
+            'CP X AB': ctm.toFixed(0),
+            'MP X TB': mtb.toFixed(0),
+            'Addition Power': (ctm+mtb).toFixed(0), 
             'TotalPower [GH/S]': totalpower.toFixed(2),
             'Total Bonus %': (totalbonus*100).toFixed(3)
 
