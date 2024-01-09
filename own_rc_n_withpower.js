@@ -1,14 +1,48 @@
 function main() {
-    let CurrentPower = 500000; // Your Current Power in GH/S
-    let CurrentBonus = 100; // Put the bonus displayed on your profile. 1 = +1% , 100 = +100%
+    let CurrentPower = 51310000; // Your Current Power in GH/S
+    let CurrentBonus = 13.55; // Put the bonus displayed on your profile. 1 = +1% , 100 = +100%
 
     let ownedMiners = ['E.V.A.',
     "CP-106",
+    "DjBone",
+    "Night Witnesses",
+    "Awaken",
+    "MineDrone",
+    "The Transducer",
+    "Bloody Mary",
+    "Tetromino",
+    "Hamster's Enemy",
+    "Whatta Duck",
+    "RollerMiner G1",
+    "BioGauge 67",
+    "RPMiner",
+    "8bubbled",
+    "Deepdiver",
+    "Khepri",
+    "Ouroboros",
+    "RollerArc S1",
+    "Armageddon",
+    "Shifter",
+    "Prescilla",
+    "JBS-200",
+    "Rolleron 741",
+    "RollerMiner S7",
     "HauntedHouse",
-    "Steamwheedle",
+    "Uncommon Pink Strom",
+    "Uncommon Black Cat",
+    "Uncommon Tron",
+    "Uncommon Mergedge Mk. I",
+    "Uncommon Tron",
+    "Uncommon RollerMiner G1",
+    "Uncommon Chattanooga Choo",
+    "Epic Mergedge",
+    "Rare Mergedge",
+    "Uncommon Mergedge",
+    "Uncommon Deepdiver",
     "Uncommon RollerArc S1",
-    "Legendary RollerArc S1",
-    "TLM-2000"]; // Example: List of owned miners
+    "Rare RollerArc S1",
+    "Uncommon CP-106",
+    "Uncommon RollerMiner S7"]; // Example: List of owned miners
     let miners = getBestRatioMiners(CurrentPower,CurrentBonus, ownedMiners);
     console.log("Sort By Ratio");
     console.log("Your Power is : " + CurrentPower + " GH/S")
@@ -33,11 +67,15 @@ function getBestRatioMiners(CurrentPower,CurrentBonus, ownedMiners) {
         let bonus = parseFloat(bonusText);
         let price = parseFloat(priceText.replace(/\s/g, '').replace('RLT', ''));
         let owned = ownedMiners.includes(name);
-
-        let addpower = owned ? power*CurrentBonus : (power*((bonus + CurrentBonus) / 100))+(CurrentPower*bonus);;
-        let totalpower = power + addpower;
-        let ratio = (totalpower/1000) / price;
         let totalbonus = (bonus+CurrentBonus)/100;
+
+        // CurrentPower * MinerBonus
+        let ctm = owned ? 0 : CurrentPower*(bonus/100) ;
+        // MinerPower * Total Bonus
+        let mtb = power*totalbonus;
+        // MinerPower + (CurrentPower*MinerPower) + (Minerpower*TotalBonus)
+        let totalpower = power+ctm+mtb;
+        let ratio = (totalpower/1000) / price;
 
 
         miners.push({
@@ -45,11 +83,13 @@ function getBestRatioMiners(CurrentPower,CurrentBonus, ownedMiners) {
             'owned': owned ? "✔" : "❌",
             'Price': price,
             'Power': power,
-            'Bonus': bonus,
-            'Addition[GH/S] ': addpower.toFixed(2),
+            'Bonus[%]': bonus,
             'Ratio': ratio.toFixed(2),
-            'T.Power[GH/S]': totalpower.toFixed(2),
-            'T.Bonus[%]': (totalbonus*100).toFixed(2)
+            'Cur.Pow X Add.Bonus': ctm.toFixed(0),
+            'Mine.Pow X Tot.Bonus': mtb.toFixed(0), 
+            'Addition Power': totalpower.toFixed(0), 
+            'TotalPower [GH/S]': (totalpower+CurrentPower).toFixed(2),
+            'Total Bonus %': (totalbonus*100).toFixed(3)
         });
     }
 
