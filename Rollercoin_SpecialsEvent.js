@@ -1,6 +1,6 @@
 function main() {
-    let PowerPerKecoin = 85000; // Power to get Each 1000 Ecoins
-    let BonusPerKEcoin = 10; // Bonus% to get Each 1000 Ecoins
+    let PowerPerKecoin = 90000; // Power to get Each 1000 Ecoins
+    let BonusPerKEcoin = 8; // Bonus% to get Each 1000 Ecoins
     let miners = getBestRatioMiners(PowerPerKecoin, BonusPerKEcoin);
     console.log("Sort By Best Ecoin Ratio");
     console.log("Power/1000Ecoin : "+PowerPerKecoin+" GH/S");
